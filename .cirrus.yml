@@ -1,6 +1,6 @@
 task:
-    name: ROM
-    timeout_in: 120m
+    name: ROM1
+    timeout_in: 300m
     container:
       image: inok2341/anu:latest
       cpu: 8
