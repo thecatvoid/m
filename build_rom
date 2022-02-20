@@ -14,4 +14,10 @@ export CCACHE_DIR=~/ccache
 export CCACHE_EXEC=$(command -v ccache)
 export USE_CCACHE=1
 export ALLOW_MISSING_DEPENDENCIES=true
-make droid -j$(nproc --all)
+
+
+m systemimage -j$(nproc --all) && \
+
+m productimage -j$(nproc --all) && \
+
+m vendorimage -j$(nproc --all)
