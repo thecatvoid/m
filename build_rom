@@ -1,0 +1,17 @@
+mkdir -p ~/.bin ~/android/rom ~/ccache/
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+chmod a+rx ~/.bin/repo
+cd ~/android/rom
+~/.bin/repo init -u https://github.com/Octavi-OS/platform_manifest.git -b 11 --depth=1
+mkdir -p .repo/local_manifests
+curl https://raw.githubusercontent.com/snjy4/android_device_motorola_guamp/main/.guamp.xml -o .repo/local_manifests/guamp.xml
+~/.bin/repo sync -j$(nproc --all) -c -f -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune
+printf 'umask = 421' >> ~/ccache/ccache.conf
+ccache -M 6G
+source build/envsetup.sh
+lunch octavi_guamp-userdebug
+export CCACHE_DIR=~/ccache
+export CCACHE_EXEC=$(command -v ccache)
+export USE_CCACHE=1
+export ALLOW_MISSING_DEPENDENCIES=true
+make droid -j$(nproc --all)
