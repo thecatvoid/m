@@ -4,7 +4,7 @@ chmod a+rx ~/.bin/repo
 cd ~/android/rom
 ~/.bin/repo init -u https://github.com/projectarcana-aosp/manifest.git -b 12.x --depth=1
 mkdir -p .repo/local_manifests
-curl https://github.com/monu70152/local_manifest/blob/master/local_manifest.xml -o .repo/local_manifests/local_manifest.xml
+curl https://raw.githubusercontent.com/monu70152/local_manifest/master/local_manifest.xml -o .repo/local_manifests/local_manifest.xml
 ~/.bin/repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 printf 'umask = 421' >> ~/ccache/ccache.conf
 ccache -M 9G
