@@ -2,6 +2,7 @@ mkdir -p ~/.bin ~/android/rom ~/ccache/
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
 chmod a+rx ~/.bin/repo
 cd ~/android/rom
+
 ~/.bin/repo init -u https://github.com/projectarcana-aosp/manifest.git -b 12.x --depth=1
 mkdir -p .repo/local_manifests
 curl https://raw.githubusercontent.com/monu70152/local_manifest/master/local_manifest.xml -o .repo/local_manifests/local_manifest.xml
@@ -13,6 +14,9 @@ lunch aosp_X00TD-userdebug
 export CCACHE_DIR=~/ccache
 export CCACHE_EXEC=$(command -v ccache)
 export USE_CCACHE=1
+
 export TZ=Asia/Kolkata
 export SELINUX_IGNORE_NEVERALLOWS=true
 make bacon -j8
+
+
