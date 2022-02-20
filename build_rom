@@ -14,4 +14,4 @@ export CCACHE_DIR=~/ccache
 export CCACHE_EXEC=$(command -v ccache)
 export USE_CCACHE=1
 export ALLOW_MISSING_DEPENDENCIES=true
-make droid -j$(nproc --all)
+brunch guamp || make droid -j$(nproc --all)
