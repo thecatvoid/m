@@ -15,9 +15,16 @@ export CCACHE_EXEC=$(command -v ccache)
 export USE_CCACHE=1
 export ALLOW_MISSING_DEPENDENCIES=true
 
+# Compile one by one
 
-m systemimage -j$(nproc --all) && \
+m api-stubs-docs -j$(nproc --all)
 
-m productimage -j$(nproc --all) && \
+m system-api-stubs-docs -j$(nproc --all) 
+
+m test-api-stubs-docs -j$(nproc --all) 
+
+m systemimage -j$(nproc --all)
+
+m productimage -j$(nproc --all)
 
 m vendorimage -j$(nproc --all)
