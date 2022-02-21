@@ -14,4 +14,4 @@ export ALLOW_MISSING_DEPENDENCIES=true
 
 export TZ=Asia/Kolkata
 export SELINUX_IGNORE_NEVERALLOWS=true
-mka bacon -j$(nproc --all)
+mka droid -j$(nproc --all)
