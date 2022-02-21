@@ -4,10 +4,10 @@ chmod a+rx ~/.bin/repo
 cd ~/android/rom
 
 
-~/.bin/repo init -u https://github.com/Octavi-OS/platform_manifest.git -b 11 --depth=1 -g default,-device,-mips,-darwin,-notdefault
+~/.bin/repo init --depth=1 --no-repo-verify -u https://github.com/Octavi-OS/platform_manifest.git -b 11 -g default,-device,-mips,-darwin,-notdefault
 mkdir -p .repo/local_manifests
 curl https://raw.githubusercontent.com/snjy4/android_device_motorola_guamp/main/.guamp.xml -o .repo/local_manifests/guamp.xml
-~/.bin/repo sync -j$(nproc --all) -c -f -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune
+~/.bin/repo sync -j$(nproc --all) -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune
 source build/envsetup.sh
 lunch octavi_guamp-userdebug
 export ALLOW_MISSING_DEPENDENCIES=true
