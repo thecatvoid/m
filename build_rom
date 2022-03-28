@@ -1,0 +1,41 @@
+mkdir -p ~/.bin ~/ROM ~/ccache/
+sudo curl https://storage.googleapis.com/git-repo-downloads/repo > /bin/repo
+chmod a+rwx /bin/repo
+cd ~/ROM
+/bin/repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --depth=1 -g default,-device,-mips,-darwin,-notdefault
+git clone --depth=1 https://gitlab.com/catvoid/manifest -b main .repo/local_manifests
+/bin/repo sync -j$(nproc --all) -c -f -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune 2>&1 | tee /tmp/trash >> /dev/null
+printf 'umask = 000' >> ~/ccache/ccache.conf
+ccache -M 100G
+ccache -o compression=false 
+source build/envsetup.sh
+lunch lineage_guamp-eng
+export CCACHE_DIR="$HOME/ccache"
+export CCACHE_EXEC="$(command -v ccache)"
+export USE_CCACHE="1"
+export ALLOW_MISSING_DEPENDENCIES="true"
+export CCACHE_UMASK="000"
+export TZ="Asia/Kolkata"
+
+# Compile one by one
+
+# m api-stubs-docs -j$(nproc --all)
+
+# m system-api-stubs-docs -j$(nproc --all) 
+
+# m test-api-stubs-docs -j$(nproc --all) 
+
+# m systemimage -j$(nproc --all)
+
+# m productimage -j$(nproc --all)
+
+# m vendorimage -j$(nproc --all)
+
+# m sepolicy
+
+# m init
+
+# m bootimage
+
+# Build please
+mka otapackage -j$(nproc --all)
