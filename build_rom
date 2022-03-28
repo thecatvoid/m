@@ -1,5 +1,5 @@
 mkdir -p ~/.bin ~/ROM ~/ccache/
-sudo curl https://storage.googleapis.com/git-repo-downloads/repo > /bin/repo
+sudo su -c 'curl https://storage.googleapis.com/git-repo-downloads/repo > /bin/repo'
 chmod a+rwx /bin/repo
 cd ~/ROM
 /bin/repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --depth=1 -g default,-device,-mips,-darwin,-notdefault
