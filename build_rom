@@ -2,7 +2,6 @@ git config --global user.name "fake"
 git config --global user.email "fake@fake.com"
 
 mkdir -p ~/.bin ~/ROM ~/ccache/
-sudo chmod a+rwx ~/los
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/repo
 chmod a+rwx ~/repo
 sudo ln -rsf ~/repo /bin/repo
