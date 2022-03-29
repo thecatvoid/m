@@ -1,10 +1,14 @@
+git config --global user.name "fake"
+git config --global user.email "fake@fake.com"
+
 mkdir -p ~/.bin ~/ROM ~/ccache/
-sudo su -c 'curl https://storage.googleapis.com/git-repo-downloads/repo > /bin/repo'
-chmod a+rwx /bin/repo
-cd ~/ROM
+sudo chmod a+rwx ~/los
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/repo
+chmod a+rwx ~/repo
+sudo ln -rsf ~/repo /bin/repo
 /bin/repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --depth=1 -g default,-device,-mips,-darwin,-notdefault
 git clone --depth=1 https://gitlab.com/catvoid/manifest -b main .repo/local_manifests
-/bin/repo sync -j$(nproc --all) -c -f -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune 2>&1 | tee /tmp/trash >> /dev/null
+/bin/repo sync -j$(nproc --all) -c -f -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune
 printf 'umask = 000' >> ~/ccache/ccache.conf
 ccache -M 100G
 ccache -o compression=false 
@@ -16,26 +20,11 @@ export USE_CCACHE="1"
 export ALLOW_MISSING_DEPENDENCIES="true"
 export CCACHE_UMASK="000"
 export TZ="Asia/Kolkata"
-
-# Compile one by one
-
+# m init -j$(nproc --all)
+# m bootimage -j$(nproc --all)
+# m sepolicy -j$(nproc --all)
 # m api-stubs-docs -j$(nproc --all)
-
-# m system-api-stubs-docs -j$(nproc --all) 
-
-# m test-api-stubs-docs -j$(nproc --all) 
-
-# m systemimage -j$(nproc --all)
-
+# m system-api-stubs-docs -j$(nproc --all)
+# m test-api-stubs-docs -j$(nproc --all)
 # m productimage -j$(nproc --all)
-
-# m vendorimage -j$(nproc --all)
-
-# m sepolicy
-
-# m init
-
-# m bootimage
-
-# Build please
-mka otapackage -j$(nproc --all)
+m -j$(nproc --all) droid
