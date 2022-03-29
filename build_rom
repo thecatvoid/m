@@ -7,7 +7,7 @@ chmod a+rwx ~/repo
 sudo ln -rsf ~/repo /bin/repo
 /bin/repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --depth=1 -g default,-device,-mips,-darwin,-notdefault
 git clone --depth=1 https://gitlab.com/catvoid/manifest -b main .repo/local_manifests
-/bin/repo sync -j$(nproc --all) -c -f -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune
+/bin/repo sync -j$(nproc --all) -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune
 printf 'umask = 000' >> ~/ccache/ccache.conf
 ccache -M 100G
 ccache -o compression=false 
