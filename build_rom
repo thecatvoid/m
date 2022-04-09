@@ -8,7 +8,6 @@ sudo ln -rsf ~/repo /bin/repo
 /bin/repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --depth=1 -g default,-device,-mips,-darwin,-notdefault
 git clone --depth=1 https://gitlab.com/catvoid/manifest -b main .repo/local_manifests
 /bin/repo sync -j$(nproc --all) -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags --prune
-rm -rf vendor/motorola/guamp/Android.bp
 printf 'umask = 000' >> ~/ccache/ccache.conf
 ccache -M 100G
 ccache -o compression=false 
@@ -27,4 +26,6 @@ export TZ="Asia/Kolkata"
 # m system-api-stubs-docs -j$(nproc --all)
 # m test-api-stubs-docs -j$(nproc --all)
 # m productimage -j$(nproc --all)
-m -j$(nproc --all) droid
+# m -j$(nproc --all) droid
+# m -j$(nproc --all) updatepackage
+m -j$(nproc --all) otapackage
